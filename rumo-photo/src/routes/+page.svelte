@@ -1,27 +1,24 @@
 <script>
     import { onMount } from 'svelte';
     import {writable} from 'svelte/store';
-    import {Avatar, Card} from 'flowbite-svelte';
+    import {Alert, Card} from 'flowbite-svelte';
+    import { InfoCircleSolid } from 'flowbite-svelte-icons';
 
 
     const array = writable([]); // Initialize as an empty array
 
     onMount(async () => {
         try {
-            const responseToken = await fetch('http://api.rumor-lab.com/token');
-            const tokenData = await responseToken.json();
-
-
-            const response = await fetch('https://apis.superwalk.io/apis/v1/marketplace?sort=LATEST&goodsType=ITEM&offset=0&limit=50', {
+            const response = await fetch('https://rumor-lab.com/goods', {
                 method: 'GET', // 요청 메서드를 정의할 수 있습니다 (GET, POST, 등)
                 headers: {
                     "Language": "ko",
-                    "Content-Type": "application/json",
-                    "X-Access-Token": tokenData.token
+                    "Content-Type": "application/json"
                 }
             }); // API 엔드포인트를 여기에 추가하세요.
             if (response.ok) {
                 const data = await response.json();
+                console.log(data)
                 array.set(data.goods); // 불러온 데이터를 array 스토어에 설정합니다.
             } else {
                 console.error('Failed to fetch data');
@@ -54,11 +51,17 @@
     }
 
 </style>
-
 <figure class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700">
+
+    <Alert border color="dark" class="m-5">
+        <InfoCircleSolid slot="icon" class="w-4 h-4" />
+        <span class="font-medium"></span>
+        상점의 기본 순서와 동일한 아이템을 보여줍니다
+    </Alert>
+
     <div class="card-grid">
         {#each goods as data}
-            <Card class="inline-block w-50">
+            <Card class="inline-block w-48">
                 <div class="flex flex-col items-center pb-1">
                     <div class="card-text">
                         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{data.name}</h5>

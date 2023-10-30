@@ -1,14 +1,16 @@
 <script>
-    import {onMount} from 'svelte';
+    import { onMount } from 'svelte';
     import {writable} from 'svelte/store';
-    import {Card} from 'flowbite-svelte';
+    import {Alert, Card} from 'flowbite-svelte';
+    import { InfoCircleSolid } from 'flowbite-svelte-icons';
+
 
 
     const array = writable([]); // Initialize as an empty array
 
     onMount(async () => {
         try {
-            const response = await fetch('http://api.rumor-lab.com/shoes'); // API 엔드포인트를 여기에 추가하세요.
+            const response = await fetch('http://rumor-lab.com/shoes'); // API 엔드포인트를 여기에 추가하세요.
             if (response.ok) {
                 const data = await response.json();
                 array.set(data); // 불러온 데이터를 array 스토어에 설정합니다.
@@ -45,9 +47,16 @@
 </style>
 
 <figure class="flex flex-col justify-center items-center p-8 text-center bg-white rounded-t-lg border-b border-gray-200 md:rounded-t-none md:rounded-tl-lg md:border-r dark:bg-gray-800 dark:border-gray-700">
+    <Alert border color="dark" class="m-5">
+        <InfoCircleSolid slot="icon" class="w-4 h-4" />
+        <span class="font-medium">실시간으로</span>
+        등급별 최저가 신발을 보여줍니다.
+    </Alert>
+
+
     <div class="card-grid">
         {#each products as data}
-            <Card class="inline-block w-50">
+            <Card class="inline-block w-48">
                 <div class="flex flex-col items-center pb-1">
                     <div class="card-text">
                         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{data.quality}</h5>
