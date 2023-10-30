@@ -10,7 +10,7 @@
 
     onMount(async () => {
         try {
-            const response = await fetch('http://rumor-lab.com/shoes'); // API 엔드포인트를 여기에 추가하세요.
+            const response = await fetch('https://rumor-lab.com/shoes'); // API 엔드포인트를 여기에 추가하세요.
             if (response.ok) {
                 const data = await response.json();
                 array.set(data); // 불러온 데이터를 array 스토어에 설정합니다.
