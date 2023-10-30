@@ -18,7 +18,6 @@
             }); // API 엔드포인트를 여기에 추가하세요.
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
                 array.set(data.goods); // 불러온 데이터를 array 스토어에 설정합니다.
             } else {
                 console.error('Failed to fetch data');
