@@ -1,19 +1,11 @@
 <script>
     import "../app.postcss";
     import {page} from '$app/stores';
-    import {
-        Navbar,
-        NavBrand,
-        NavLi,
-        NavUl,
-        NavHamburger,
-        Button,
-        Dropdown,
-        DropdownItem,
-        DropdownDivider
-    } from 'flowbite-svelte';
-    import {ChevronDownOutline} from 'flowbite-svelte-icons';
+    import {Navbar, NavBrand, NavHamburger, NavLi, NavUl} from 'flowbite-svelte';
+    import { dev } from '$app/environment';
+    import { inject } from '@vercel/analytics';
 
+    inject({ mode: dev ? 'development' : 'production' });
     $: activeUrl = $page.url.pathname;
 </script>
 
