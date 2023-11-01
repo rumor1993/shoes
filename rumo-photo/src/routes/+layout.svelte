@@ -1,7 +1,7 @@
 <script>
     import "../app.postcss";
     import {page} from '$app/stores';
-    import {Navbar, NavBrand, NavHamburger, NavLi, NavUl} from 'flowbite-svelte';
+    import {Navbar, NavBrand, NavHamburger, NavLi, NavUl, Button, Indicator, Badge} from 'flowbite-svelte';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
 
@@ -11,18 +11,27 @@
 
 <header>
     <Navbar let:NavContainer color="primary">
-        <NavContainer class="border px-5 py-2 rounded-lg bg-white dark:bg-gray-600">
+        <NavContainer class="border px-5 py-2 rounded-lg bg-white">
             <NavBrand href="/">
                 <img src="https://flowbite-svelte.com/images/flowbite-svelte-icon-logo.svg" class="mr-3 h-6 sm:h-9"
                      alt="Flowbite Logo"/>
-                <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Super Shoes Info</span>
+                <span class="self-center whitespace-nowrap text-2xl font-semibold">Super Shoes Info</span>
             </NavBrand>
             <NavHamburger />
             <NavUl class="order-1" {activeUrl}>
                 <NavLi href="/" active={true} class="cursor-pointer text-base">
-                    Items
+                    <Button class="relative" size="sm">
+                        Items
+                        <span class="sr-only">Notifications</span>
+                    </Button>
                 </NavLi>
-                <NavLi class="text-base" href="/lowPrice">LowPrice</NavLi>
+                <NavLi class="text-base" href="/lowPrice">
+                    <Button class="relative" size="sm">
+                        Low Price
+                        <span class="sr-only">Notifications</span>
+                        <Indicator color="blue" border size="xl" placement="top-right" class="text-xs font-bold">N</Indicator>
+                    </Button>
+                </NavLi>
             </NavUl>
         </NavContainer>
     </Navbar>
