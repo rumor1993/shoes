@@ -22,7 +22,7 @@
                 <NavLi href="/" active={true} class="cursor-pointer text-base">
                     Items
                 </NavLi>
-                <NavLi class="text-base" href="/shoes">Shoes</NavLi>
+                <NavLi class="text-base" href="/lowPrice">LowPrice</NavLi>
             </NavUl>
         </NavContainer>
     </Navbar>
